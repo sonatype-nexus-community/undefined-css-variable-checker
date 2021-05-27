@@ -1,0 +1,10 @@
+{
+  "name": "CSS Custom Property Checker",
+  "description": "A Devtools extension that detects usages of undefined CSS custom properties.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "devtools_page": "devtools.html"
+}
