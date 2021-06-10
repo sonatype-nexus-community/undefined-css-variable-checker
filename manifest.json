@@ -6,5 +6,7 @@
   "background": {
     "service_worker": "background.js"
   },
+  "permissions": ["scripting"],
+  "host_permissions": ["*://*/*"],
   "devtools_page": "devtools.html"
 }
