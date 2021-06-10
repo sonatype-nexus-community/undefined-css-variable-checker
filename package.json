@@ -1,0 +1,10 @@
+{
+  "name": "css-custom-property-checker-extension",
+  "version": "1.0.0",
+  "description": "Chrome Devtools Extension that searches for uses of undefined CSS Custom Properties",
+  "author": "Ross Pokorny <rpokorny@sonatype.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@sonatype/react-shared-components": "^7.0.11"
+  }
+}
