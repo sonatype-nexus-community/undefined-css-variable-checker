@@ -17,16 +17,19 @@ port.onMessage.addListener(results => {
   console.log('panel listener');
   const tableContent = document.createDocumentFragment();
 
-  for (const { variable, location } of results) {
+  for (const { variable, styleSheet, selector } of results) {
     const row = document.createElement('tr'),
         variableCell = document.createElement('td'),
-        locationCell = document.createElement('td');
+        stylesheetCell = document.createElement('td'),
+        selectorCell = document.createElement('td');
 
     variableCell.textContent = variable;
-    locationCell.textContent = location;
+    stylesheetCell.textContent = styleSheet;
+    selectorCell.textContent = selector;
 
     row.appendChild(variableCell);
-    row.appendChild(locationCell);
+    row.appendChild(stylesheetCell);
+    row.appendChild(selectorCell);
 
     tableContent.appendChild(row);
   }
