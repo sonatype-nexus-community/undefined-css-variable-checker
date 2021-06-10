@@ -11,3 +11,27 @@ document.getElementById('check-btn').addEventListener('click', function() {
     tabId: chrome.devtools.inspectedWindow.tabId
   });
 });
+
+console.log('port', port);
+port.onMessage.addListener(results => {
+  console.log('panel listener');
+  const tableContent = document.createDocumentFragment();
+
+  for (const { variable, element } of results) {
+    const row = document.createElement('tr'),
+        variableCell = document.createElement('td'),
+        elementCell = document.createElement('td');
+
+    variableCell.textContent = variable;
+    elementCell.textContent = element;
+
+    console.log('element', element);
+
+    row.appendChild(variableCell);
+    row.appendChild(elementCell);
+
+    tableContent.appendChild(row);
+  }
+
+  document.getElementById('results-body').replaceChildren(tableContent);
+});

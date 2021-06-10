@@ -10,6 +10,15 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
     }
   }
 
+  function resultListener(message) {
+    if (message.type === 'checker-results') {
+      console.log('devToolsConnection', devToolsConnection);
+      devToolsConnection.postMessage(message.results);
+    }
+  }
+
+  chrome.runtime.onMessage.addListener(resultListener);
+
   devToolsConnection.onMessage.addListener(devToolsListener);
 
   devToolsConnection.onDisconnect.addListener(function() {
