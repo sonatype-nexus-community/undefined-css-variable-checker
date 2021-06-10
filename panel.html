@@ -1,20 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html class="nx-html">
   <head>
     <title>CSS Custom Property Checker</title>
-    <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="node_modules/@sonatype/react-shared-components/react-shared-components.css">
   </head>
-  <body>
-    <button id="check-btn">Check!</button>
-    <table>
-      <thead>
-        <th>Variable</th>
-        <th>Stylesheet</th>
-        <th>Selector</th>
-      </thead>
-      <tbody id="results-body">
-      </tbody>
-    </table>
+  <body class="nx-body">
+    <div class="nx-page">
+      <main class="nx-page-main nx-viewport-sized">
+        <div class="nx-btn-bar">
+          <button id="check-btn" class="nx-btn nx-btn--primary">Check!</button>
+        </div>
+        <div class="nx-table-container nx-viewport-sized__scrollable nx-scrollable">
+          <table class="nx-table">
+            <thead>
+              <tr class="nx-table-row nx-table-row--header">
+                <th class="nx-cell nx-cell--header">Variable</th>
+                <th class="nx-cell nx-cell--header">Stylesheet</th>
+                <th class="nx-cell nx-cell--header">Selector</th>
+              </tr>
+            </thead>
+            <tbody id="results-body">
+              <tr class="nx-table-row">
+                <td class="nx-cell nx-cell--meta-info" colspan="3">
+                  Click the button above to check for undefined CSS custom properties
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
     <script src="panel.js"></script>
   </body>
 </html>

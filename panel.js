@@ -27,6 +27,9 @@ port.onMessage.addListener(results => {
     stylesheetCell.textContent = styleSheet;
     selectorCell.textContent = selector;
 
+    row.classList.add('nx-table-row');
+    [variableCell, stylesheetCell, selectorCell].forEach(cell => cell.classList.add('nx-cell'));
+
     row.appendChild(variableCell);
     row.appendChild(stylesheetCell);
     row.appendChild(selectorCell);
