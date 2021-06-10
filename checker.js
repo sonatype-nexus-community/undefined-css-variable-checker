@@ -30,7 +30,7 @@
               const variableValue = getComputedStyle(element).getPropertyValue(variable);
 
               if (!variableValue) {
-                results.push({ variable, element });
+                results.push({ variable, selectorText });
               }
             }
           }
