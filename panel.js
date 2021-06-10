@@ -12,20 +12,34 @@ document.getElementById('check-btn').addEventListener('click', function() {
   });
 });
 
-console.log('port', port);
+function mkSelectorClickEventListener(counter) {
+  return () => {
+    console.log('link click', counter);
+    port.postMessage({
+      type: 'highlight-element',
+      elementIndex: counter,
+      tabId: chrome.devtools.inspectedWindow.tabId
+    });
+  };
+}
+
 port.onMessage.addListener(results => {
-  console.log('panel listener');
   const tableContent = document.createDocumentFragment();
 
+  let counter = 0;
   for (const { variable, styleSheet, selector } of results) {
     const row = document.createElement('tr'),
         variableCell = document.createElement('td'),
         stylesheetCell = document.createElement('td'),
-        selectorCell = document.createElement('td');
+        selectorCell = document.createElement('td'),
+        elementLink = document.createElement('a');
 
     variableCell.textContent = variable;
     stylesheetCell.textContent = styleSheet;
-    selectorCell.textContent = selector;
+    elementLink.textContent = selector;
+    selectorCell.appendChild(elementLink);
+
+    elementLink.addEventListener('click', mkSelectorClickEventListener(counter));
 
     row.classList.add('nx-table-row');
     [variableCell, stylesheetCell, selectorCell].forEach(cell => cell.classList.add('nx-cell'));
@@ -35,6 +49,8 @@ port.onMessage.addListener(results => {
     row.appendChild(selectorCell);
 
     tableContent.appendChild(row);
+
+    counter++;
   }
 
   document.getElementById('results-body').replaceChildren(tableContent);

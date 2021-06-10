@@ -1,6 +1,5 @@
 (function() {
-  const elementsBySelector = {},
-      results = [];
+  const elementsBySelector = {};
 
   function getElementsBySelector(selector) {
     const cached = elementsBySelector[selector];
@@ -39,7 +38,7 @@
   /**
    * Given a CSSStyleValue and a selector or element on which it is used, find any cases on that selector/element
    * where an undefined CSS custom property is used
-   * @return an iterator of names of undefined CSS custom properties
+   * @return an iterator of objects containing the variable name and the element where the issue was detected
    */
   function* checkCssValue(value, elOrSelector) {
     if (value instanceof CSSUnparsedValue) {
@@ -59,7 +58,7 @@
               const variableValue = getComputedStyle(element).getPropertyValue(variable);
 
               if (!variableValue) {
-                yield variable;
+                yield { variable, element };
               }
             }
           }
@@ -91,11 +90,11 @@
         if (rule instanceof window.CSSStyleRule) {
           const { selectorText, styleMap } = rule;
 
-          const badVars = checkStyleMap(styleMap, selectorText);
+          const styleMapResults = checkStyleMap(styleMap, selectorText);
 
-          for (const variable of badVars) {
+          for (const result of styleMapResults) {
             yield {
-              variable,
+              ...result,
               styleSheet: styleSheetLabel,
               selector: selectorText
             };
@@ -114,11 +113,11 @@
     for (const el of document.querySelectorAll('[style]')) {
       const { attributeStyleMap } = el;
 
-      const badVars = checkStyleMap(attributeStyleMap, el);
+      const styleMapResults = checkStyleMap(attributeStyleMap, el);
 
-      for (const variable of badVars) {
+      for (const result of styleMapResults) {
         yield {
-          variable,
+          ...result,
           styleSheet: '(inline)',
           selector: generateSelector(el)
         };
@@ -131,5 +130,16 @@
     yield* checkInlineStyles();
   }
 
-  chrome.runtime.sendMessage({ type: 'checker-results', results: Array.from(checkAllStyles()) });
+  const results = Array.from(checkAllStyles());
+
+  chrome.runtime.sendMessage({ type: 'checker-results', results });
+  chrome.runtime.onMessage.addListener(message => {
+    console.log('received message in checker', message);
+    if (message.type === 'highlight-element') {
+      const { element } = results[message.elementIndex];
+
+      // inspect is a global that is available when the dev tools are open, I think
+      inspect(element);
+    }
+  });
 })();
