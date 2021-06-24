@@ -5,5 +5,10 @@
   "main": "index.js",
   "author": "Ross Pokorny <rpokorny@sonatype.com>",
   "license": "Apache-2.0",
-  "private": false
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sonatype-nexus-community/undefined-css-variable-checker.git",
+    "directory": "npm-package"
+  }
 }
