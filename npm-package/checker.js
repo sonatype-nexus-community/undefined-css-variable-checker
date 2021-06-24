@@ -1,17 +1,3 @@
-const elementsBySelector = {};
-
-function getElementsBySelector(selector) {
-  const cached = elementsBySelector[selector];
-  if (cached) {
-    return cached;
-  }
-  else {
-    const elements = document.querySelectorAll(selector);
-    elementsBySelector[selector] = elements;
-    return elements;
-  }
-}
-
 /**
  * Given a CSSStyleValue and a selector or element on which it is used, find any cases on that selector/element
  * where an undefined CSS custom property is used
@@ -29,7 +15,7 @@ function* checkCssValue(value, elOrSelector) {
           yield* checkCssValue(fallback, elOrSelector);
         }
         else {
-          const elements = typeof elOrSelector === 'string' ? getElementsBySelector(elOrSelector) : [elOrSelector];
+          const elements = typeof elOrSelector === 'string' ? document.querySelectorAll(elOrSelector) : [elOrSelector];
 
           for (const element of elements) {
             const variableValue = getComputedStyle(element).getPropertyValue(variable);
