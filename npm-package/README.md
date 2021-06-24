@@ -67,3 +67,9 @@ An aggregate of the other two functions. The objects which it returns contain th
 ## Current limitations
 At the moment this module only checks top-level style declarations within stylesheets, not those nested within
 `@media` declarations or anything else more complex. This is intended to be improved over time.
+
+## Browser Support
+This package makes use of ES2015+ language features including generators, as well as
+the [CSS Typed Object Model API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Typed_OM_API). Support for the
+latter in particular is limited as of time of writing, so this package will only work in recent versions of
+Chromium-based browsers.
