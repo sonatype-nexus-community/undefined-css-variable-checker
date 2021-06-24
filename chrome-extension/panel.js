@@ -66,7 +66,7 @@ document.getElementById('check-btn').addEventListener('click', function() {
 
   chrome.scripting.executeScript({
     target: { tabId, allFrames: true },
-    files: ['dist/content.js']
+    files: ['./content.js']
   });
 });
 
