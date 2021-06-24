@@ -39,13 +39,17 @@ function* getResults() {
   }
 }
 
-const results = Array.from(getResults());
+// save as a global var so that it's accessible in the highlight-element eval script. Note that the global
+// context here is separate from that of the actual page.
+self.results = Array.from(getResults());
 
-chrome.runtime.sendMessage({ type: 'checker-results', results });
+chrome.runtime.sendMessage({ type: 'checker-results', results: self.results });
 //chrome.runtime.onMessage.addListener(message => {
   //console.log('received message in checker', message);
   //if (message.type === 'highlight-element') {
+    //console.log('results', results);
     //const { element } = results[message.elementIndex];
+    //console.log('element', element);
 
     //// inspect is a global that is available when the dev tools are open, I think
     //inspect(element);
