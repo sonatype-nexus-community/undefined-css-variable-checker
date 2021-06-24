@@ -13,28 +13,6 @@
     }
   }
 
-  // given an element in the document, create a selector consisting of the tag, id, and classes of that element
-  // and all ancestors
-  function generateSelector(el) {
-    function selectorForEl(el) {
-      const { tagName, classList, id } = el,
-          classSelector = classList.length ? `.${Array.from(classList).join('.')}` : '',
-          idSelector = id ? `#${id}` : '';
-
-      return tagName.toLowerCase() + idSelector + classSelector;
-    }
-
-    function* getSelectorParts(el) {
-      if (el.parentElement) {
-        yield* getSelectorParts(el.parentElement);
-      }
-
-      yield selectorForEl(el);
-    }
-
-    return Array.from(getSelectorParts(el)).join(' > ');
-  }
-
   /**
    * Given a CSSStyleValue and a selector or element on which it is used, find any cases on that selector/element
    * where an undefined CSS custom property is used
