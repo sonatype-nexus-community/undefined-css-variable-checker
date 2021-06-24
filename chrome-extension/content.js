@@ -1,4 +1,4 @@
-import { checkAllStyles } from '@sonatype/undefined-css-custom-property-checker';
+import { checkAllStyles } from '@sonatype/undefined-css-variable-checker';
 
 // TODO at the moment this is a dumping ground for things in the main checker file which are specific
 // to the chrome extension and not the utility lib. Will be refactored to use the utility lib later

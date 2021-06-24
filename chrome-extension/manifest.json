@@ -1,6 +1,6 @@
 {
-  "name": "CSS Custom Property Checker",
-  "description": "A Devtools extension that detects usages of undefined CSS custom properties.",
+  "name": "CSS Undefined Variable Checker",
+  "description": "A Devtools extension that detects usages of undefined CSS variables",
   "version": "1.0",
   "manifest_version": 3,
   "background": {

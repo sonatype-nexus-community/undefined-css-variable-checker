@@ -1,7 +1,7 @@
 {
-  "name": "@sonatype/undefined-css-custom-property-checker",
+  "name": "@sonatype/undefined-css-variable-checker",
   "version": "1.0.0",
-  "description": "A utility to detect uses of undefined CSS custom properties",
+  "description": "A utility to detect uses of undefined CSS variables",
   "main": "index.js",
   "author": "Ross Pokorny",
   "license": "MIT",

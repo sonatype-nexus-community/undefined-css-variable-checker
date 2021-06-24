@@ -181,7 +181,7 @@
     prop-types "^15.7.2"
     ramda "^0.27.1"
 
-"@sonatype/undefined-css-custom-property-checker@link:../npm-package":
+"@sonatype/undefined-css-variable-checker@link:../npm-package":
   version "0.0.0"
   uid ""
 

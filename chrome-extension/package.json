@@ -1,7 +1,7 @@
 {
-  "name": "css-custom-property-checker-extension",
+  "name": "css-variable-checker-extension",
   "version": "1.0.0",
-  "description": "Chrome Devtools Extension that searches for uses of undefined CSS Custom Properties",
+  "description": "Chrome Devtools Extension that searches for uses of undefined CSS Variables",
   "author": "Ross Pokorny <rpokorny@sonatype.com>",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@sonatype/react-shared-components": "^7.0.11",
-    "@sonatype/undefined-css-custom-property-checker": "link:../npm-package"
+    "@sonatype/undefined-css-variable-checker": "link:../npm-package"
   },
   "devDependencies": {
     "webpack": "^5.40.0",

@@ -1,5 +1,5 @@
 /**
- * checks to see if a CSSRule is of a type that is known not to support CSS custom properties
+ * checks to see if a CSSRule is of a type that is known not to support CSS variables
  */
 function isIrrelevantRuleType(rule) {
   const irrelevantRuleTypes = [
@@ -15,7 +15,7 @@ function isIrrelevantRuleType(rule) {
 
 /**
  * Given a CSSStyleValue and a selector or element on which it is used, find any cases on that selector/element
- * where an undefined CSS custom property is used
+ * where an undefined CSS variable is used
  * @return an iterator of objects containing the variable name and the element where the issue was detected
  */
 function* checkCssValue(value, elOrSelector) {
@@ -47,7 +47,7 @@ function* checkCssValue(value, elOrSelector) {
 
 /**
  * look through a StylePropertyMap for undefined vars
- * @return an iterator of names of undefined CSS custom properties
+ * @return an iterator of names of undefined CSS variables
  */
 function* checkStyleMap(styleMap, elOrSelector) {
   // each entry in the map contains a list, hence the double loop
@@ -91,7 +91,7 @@ function* checkRule(rule) {
     yield* checkGroupingRule(rule);
   }
   else if (isIrrelevantRuleType(rule)) {
-    // These rules don't use custom properties, so do nothing
+    // These rules don't use variables, so do nothing
   }
   else {
     console.warn('Unknown CSSRule found', rule);
@@ -105,7 +105,7 @@ function* checkStyleSheet(styleSheet) {
 }
 
 /**
- * Search all stylesheets loaded into the document for uses of undefined CSS custom properties.
+ * Search all stylesheets loaded into the document for uses of undefined CSS variables.
  */
 export function* checkStyleSheets() {
   for (const styleSheet of document.styleSheets) {
@@ -116,7 +116,7 @@ export function* checkStyleSheets() {
 }
 
 /**
- * Search all inline style attributes in the document for uses of undefined CSS custom properties.
+ * Search all inline style attributes in the document for uses of undefined CSS variables.
  */
 export function* checkInlineStyles() {
   for (const el of document.querySelectorAll('[style]')) {

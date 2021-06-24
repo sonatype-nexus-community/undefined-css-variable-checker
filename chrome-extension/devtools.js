@@ -1,1 +1,1 @@
-chrome.devtools.panels.create('CSS Custom Property Checker', 'foo.png', 'panel.html');
+chrome.devtools.panels.create('CSS Undefined Variable Checker', 'foo.png', 'panel.html');

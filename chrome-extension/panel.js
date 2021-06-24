@@ -2,7 +2,7 @@
 // page, it must go through the registered service worker. At the same time, only this script knows the tabId
 // of the page
 const port = chrome.runtime.connect({
-  name: 'css-custom-property-checker'
+  name: 'css-variable-checker'
 });
 
 document.getElementById('check-btn').addEventListener('click', function() {

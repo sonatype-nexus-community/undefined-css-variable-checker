@@ -1,14 +1,14 @@
-# Undefined CSS Custom Property Checker
+# Undefined CSS Variable Checker
 
 This package provides utility functions to check the current state of a webpage for any uses of undefined
-CSS custom properties. Note that because a property could be defined in a completely different place than it is used,
+CSS variables. Note that because a property could be defined in a completely different place than it is used,
 this check must be performed on a live webpage, and not statically on a stylesheet alone.
 
 Also soon to be available as a Chrome devtools extension!
 
 ## Installation
 ```
-yarn add @sonatype/undefined-css-custom-property-checker
+yarn add @sonatype/undefined-css-variable-checker
 ```
 
 ## API
@@ -18,30 +18,30 @@ an iterator of objects as described farther below.
 ### Functions
 
 #### checkInlineStyles
-This function checks all HTML `style` attributes present on the page for uses of undefined CSS custom properties. The
+This function checks all HTML `style` attributes present on the page for uses of undefined CSS variables. The
 objects which it returns contain the following fields:
 
 <dl>
   <dt>variable</dt>
-  <dd>The name of the undefined CSS custom property (aka variable) that was found</dd>
+  <dd>The name of the undefined CSS variable that was found</dd>
   <dt>element</dt>
-  <dd>the DOM element on which the custom property was used where it was found to be undefined</dd>
+  <dd>the DOM element on which the variable was used where it was found to be undefined</dd>
 </dl>
 
 #### checkStyleSheets
-This function checks all uses of CSS custom properties within stylesheets present on the page. For each custom property
-found, all elements matching the selector for that CSS block are checked to see whether the custom property is defined
+This function checks all uses of CSS variables within stylesheets present on the page. For each variable
+found, all elements matching the selector for that CSS block are checked to see whether the variable is defined
 for that element. The objects which it returns contain the following fields:
 
 <dl>
   <dt>variable</dt>
-  <dd>The name of the undefined CSS custom property (aka variable) that was found</dd>
+  <dd>The name of the undefined CSS variable that was found</dd>
   <dt>element</dt>
-  <dd>the DOM element on which the custom property was used where it was found to be undefined</dd>
+  <dd>the DOM element on which the variable was used where it was found to be undefined</dd>
   <dt>styleSheet</dt>
-  <dd>The styleSheet object for the stylesheet where the undefined property was found</dd>
+  <dd>The styleSheet object for the stylesheet where the undefined variable was found</dd>
   <dt>selector</dt>
-  <dd>The selector on the CSS block where the custom property was found</dd>
+  <dd>The selector on the CSS block where the variable was found</dd>
 </dl>
 
 #### checkAllStyles
@@ -49,15 +49,15 @@ An aggregate of the other two functions. The objects which it returns contain th
 
 <dl>
   <dt>variable</dt>
-  <dd>The name of the undefined CSS custom property (aka variable) that was found</dd>
+  <dd>The name of the undefined CSS variable that was found</dd>
   <dt>element</dt>
-  <dd>the DOM element on which the custom property was used where it was found to be undefined</dd>
+  <dd>the DOM element on which the variable was used where it was found to be undefined</dd>
   <dt>inline</dt>
   <dd>boolean value for whether this object pertains to an inline `style` attribute or a stylesheet</dd>
   <dt>styleSheet</dt>
-  <dd>The styleSheet object for the stylesheet where the undefined property was found. Null for inline styles</dd>
+  <dd>The styleSheet object for the stylesheet where the undefined variable was found. Null for inline styles</dd>
   <dt>selector</dt>
-  <dd>The selector on the CSS block where the custom property was found. Null for inline styles</dd>
+  <dd>The selector on the CSS block where the variable was found. Null for inline styles</dd>
 </dl>
 
 ## Browser Support
