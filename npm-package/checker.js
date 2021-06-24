@@ -107,8 +107,6 @@ function* checkStyleSheet(styleSheet) {
 
 /**
  * Search all stylesheets loaded into the document for uses of undefined CSS custom properties.
- * @return an iterator of objects specifying the variable name, an info string about the stylesheet, and
- * the selector within the stylesheet where the issue was found.
  */
 export function* checkStyleSheets() {
   for (const styleSheet of document.styleSheets) {
@@ -118,8 +116,6 @@ export function* checkStyleSheets() {
 
 /**
  * Search all inline style attributes in the document for uses of undefined CSS custom properties.
- * @return an iterator of objects specifying the variable name, an info string about the stylesheet (just "(inline)"
- * in this case), and a selector for the element where the issue was found.
  */
 export function* checkInlineStyles() {
   for (const el of document.querySelectorAll('[style]')) {
