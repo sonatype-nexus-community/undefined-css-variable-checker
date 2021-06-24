@@ -4,6 +4,6 @@
   "description": "A utility to detect uses of undefined CSS variables",
   "main": "index.js",
   "author": "Ross Pokorny <rpokorny@sonatype.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "private": false
 }

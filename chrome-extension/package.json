@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Chrome Devtools Extension that searches for uses of undefined CSS Variables",
   "author": "Ross Pokorny <rpokorny@sonatype.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "build": "npm-run-all -p copy copy-stylesheet copy-icons webpack",
     "start": "npm-run-all -p copy-watch copy-stylesheet-watch copy-icons-watch webpack-watch",
