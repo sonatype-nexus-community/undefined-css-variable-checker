@@ -6,7 +6,7 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
       case 'check-css-vars':
         chrome.scripting.executeScript({
           target: { tabId: message.tabId, allFrames: true },
-          files: ['checker.js']
+          files: ['dist/content.js']
         });
         break;
       case 'highlight-element':

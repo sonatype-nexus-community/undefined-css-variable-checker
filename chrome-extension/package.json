@@ -4,7 +4,16 @@
   "description": "Chrome Devtools Extension that searches for uses of undefined CSS Custom Properties",
   "author": "Ross Pokorny <rpokorny@sonatype.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack --watch"
+  },
   "dependencies": {
-    "@sonatype/react-shared-components": "^7.0.11"
+    "@sonatype/react-shared-components": "^7.0.11",
+    "@sonatype/undefined-css-custom-property-checker": "link:../npm-package"
+  },
+  "devDependencies": {
+    "webpack": "^5.40.0",
+    "webpack-cli": "^4.7.2"
   }
 }

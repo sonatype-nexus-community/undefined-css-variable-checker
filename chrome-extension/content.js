@@ -1,3 +1,5 @@
+import { checkAllStyles } from '@sonatype/undefined-css-custom-property-checker';
+
 // TODO at the moment this is a dumping ground for things in the main checker file which are specific
 // to the chrome extension and not the utility lib. Will be refactored to use the utility lib later
 
@@ -23,17 +25,29 @@ function generateSelector(el) {
   return Array.from(getSelectorParts(el)).join(' > ');
 }
 
-const styleSheetLabel = styleSheet.title ? `${styleSheet.title}: ${styleSheet.href}` : styleSheet.href;
+const getStyleSheetLabel = styleSheet => styleSheet.title ?
+  `${styleSheet.title}: ${styleSheet.href}` : styleSheet.href;
 
-
-const results = Array.from(checkAllStyles());
-chrome.runtime.sendMessage({ type: 'checker-results', results });
-chrome.runtime.onMessage.addListener(message => {
-  console.log('received message in checker', message);
-  if (message.type === 'highlight-element') {
-    const { element } = results[message.elementIndex];
-
-    // inspect is a global that is available when the dev tools are open, I think
-    inspect(element);
+function* getResults() {
+  const rawResults = checkAllStyles();
+  for (const result of rawResults) {
+    yield {
+      ...result,
+      selector: result.selector || generateSelector(result.element),
+      styleSheet: result.inline ? '(inline)' : getStyleSheetLabel(result.styleSheet)
+    };
   }
-});
+}
+
+const results = Array.from(getResults());
+
+chrome.runtime.sendMessage({ type: 'checker-results', results });
+//chrome.runtime.onMessage.addListener(message => {
+  //console.log('received message in checker', message);
+  //if (message.type === 'highlight-element') {
+    //const { element } = results[message.elementIndex];
+
+    //// inspect is a global that is available when the dev tools are open, I think
+    //inspect(element);
+  //}
+//});

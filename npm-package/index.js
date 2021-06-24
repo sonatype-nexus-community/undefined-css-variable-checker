@@ -66,7 +66,6 @@ function* checkStyleRule(rule) {
   for (const result of styleMapResults) {
     yield {
       ...result,
-      styleSheet,
       selector: selectorText
     };
   }
@@ -110,7 +109,9 @@ function* checkStyleSheet(styleSheet) {
  */
 export function* checkStyleSheets() {
   for (const styleSheet of document.styleSheets) {
-    checkStyleSheet(style);
+    for (const result of checkStyleSheet(styleSheet)) {
+      yield { ...result, styleSheet };
+    }
   }
 }
 
