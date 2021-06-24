@@ -35,6 +35,7 @@ port.onMessage.addListener(results => {
     selectorCell.appendChild(elementLink);
 
     elementLink.addEventListener('click', mkSelectorClickEventListener(counter));
+    elementLink.classList.add('nx-text-link');
 
     row.classList.add('nx-table-row');
     [variableCell, stylesheetCell, selectorCell].forEach(cell => cell.classList.add('nx-cell'));
