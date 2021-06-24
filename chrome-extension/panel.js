@@ -53,5 +53,22 @@ port.onMessage.addListener(results => {
     counter++;
   }
 
+  if (!counter) {
+    const row = document.createElement('tr'),
+        cell = document.createElement('td');
+
+    row.classList.add('nx-table-row');
+
+    cell.colSpan = 3;
+    cell.classList.add('nx-cell');
+    cell.classList.add('nx-cell--meta-info');
+
+    // the thing on the end is a party popper emoji
+    cell.textContent = 'No undefined CSS variables found! \u{1F389}';
+
+    row.appendChild(cell);
+    tableContent.appendChild(row);
+  }
+
   document.getElementById('results-body').replaceChildren(tableContent);
 });
