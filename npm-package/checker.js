@@ -82,7 +82,7 @@
    * @return an iterator of objects specifying the variable name, an info string about the stylesheet, and
    * the selector within the stylesheet where the issue was found.
    */
-  function* checkStylesheets() {
+  function* checkStyleSheets() {
     for (const styleSheet of document.styleSheets) {
       const styleSheetLabel = styleSheet.title ? `${styleSheet.title}: ${styleSheet.href}` : styleSheet.href;
 
@@ -126,7 +126,7 @@
   }
 
   function* checkAllStyles() {
-    yield* checkStylesheets();
+    yield* checkStyleSheets();
     yield* checkInlineStyles();
   }
 
