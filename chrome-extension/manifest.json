@@ -5,5 +5,10 @@
   "manifest_version": 3,
   "permissions": ["scripting"],
   "host_permissions": ["*://*/*"],
-  "devtools_page": "devtools.html"
+  "devtools_page": "devtools.html",
+  "icons": {
+    "16": "assets/16x16.png",
+    "48": "assets/48x48.png",
+    "128": "assets/128x128.png"
+  }
 }

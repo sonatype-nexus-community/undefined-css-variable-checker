@@ -5,15 +5,17 @@
   "author": "Ross Pokorny <rpokorny@sonatype.com>",
   "license": "MIT",
   "scripts": {
-    "build": "npm-run-all -p copy copy-stylesheet webpack",
-    "start": "npm-run-all -p copy-watch copy-stylesheet-watch webpack-watch",
+    "build": "npm-run-all -p copy copy-stylesheet copy-icons webpack",
+    "start": "npm-run-all -p copy-watch copy-stylesheet-watch copy-icons-watch webpack-watch",
     "clean": "rimraf dist",
     "webpack": "webpack",
     "webpack-watch": "webpack --watch",
     "copy": "cpx \"{devtools.*,panel.*,manifest.json}\" dist",
     "copy-watch": "cpx -w \"{devtools.*,panel.*,manifest.json}\" dist",
     "copy-stylesheet": "cpx \"node_modules/@sonatype/react-shared-components/{react-shared-components.css,assets/fonts/*}\" dist",
-    "copy-stylesheet-watch": "cpx -w \"node_modules/@sonatype/react-shared-components/{react-shared-components.css,assets/fonts/*}\" dist"
+    "copy-stylesheet-watch": "cpx -w \"node_modules/@sonatype/react-shared-components/{react-shared-components.css,assets/fonts/*}\" dist",
+    "copy-icons": "cpx \"icons/*\" dist/assets",
+    "copy-icons-watch": "cpx -w \"icons/*\" dist/assets"
   },
   "dependencies": {
     "@sonatype/react-shared-components": "^7.0.11",
