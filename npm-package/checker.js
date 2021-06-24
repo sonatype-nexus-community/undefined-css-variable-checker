@@ -1,3 +1,6 @@
+/**
+ * checks to see if a CSSRule is of a type that is known not to support CSS custom properties
+ */
 function isIrrelevantRuleType(rule) {
   const irrelevantRuleTypes = [
     CSSFontFaceRule,
