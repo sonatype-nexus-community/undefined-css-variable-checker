@@ -1,3 +1,15 @@
+function isIrrelevantRuleType(rule) {
+  const irrelevantRuleTypes = [
+    CSSFontFaceRule,
+    CSSNamespaceRule,
+    CSSCounterStyleRule,
+    CSSKeyframesRule,
+    CSSKeyframeRule
+  ];
+
+  return !!irrelevantRuleTypes.find(type => rule instanceof type);
+}
+
 /**
  * Given a CSSStyleValue and a selector or element on which it is used, find any cases on that selector/element
  * where an undefined CSS custom property is used
@@ -43,6 +55,53 @@ function* checkStyleMap(styleMap, elOrSelector) {
   }
 }
 
+function* checkStyleRule(rule) {
+  const { selectorText, styleMap } = rule;
+
+  const styleMapResults = checkStyleMap(styleMap, selectorText);
+
+  for (const result of styleMapResults) {
+    yield {
+      ...result,
+      styleSheet,
+      selector: selectorText
+    };
+  }
+}
+
+function* checkImportRule(rule) {
+  yield* checkStyleSheet(rule.stylesheet);
+}
+
+// checks rules that are subtypes of CSSGroupingRule, eg CSSMediaRule, CSSPageRule, etc.
+// For our needs, CSSGroupingRule happens to have the same interface as CSSStyleSheet so
+// just use the same function
+const checkGroupingRule = checkStyleSheet;
+
+function* checkRule(rule) {
+  if (rule instanceof CSSStyleRule) {
+    yield* checkStyleRule(rule);
+  }
+  else if (rule instanceof CSSImportRule) {
+    yield* checkImportRule(rule);
+  }
+  else if (rule instanceof CSSGroupingRule) {
+    yield* checkGroupingRule(rule);
+  }
+  else if (isIrrelevantRuleType(rule)) {
+    // These rules don't use custom properties, so do nothing
+  }
+  else {
+    console.warn('Unknown CSSRule found', rule);
+  }
+}
+
+function* checkStyleSheet(styleSheet) {
+  for (const rule of styleSheet.cssRules) {
+    yield* checkRule(rule);
+  }
+}
+
 /**
  * Search all stylesheets loaded into the document for uses of undefined CSS custom properties.
  * @return an iterator of objects specifying the variable name, an info string about the stylesheet, and
@@ -50,22 +109,7 @@ function* checkStyleMap(styleMap, elOrSelector) {
  */
 export function* checkStyleSheets() {
   for (const styleSheet of document.styleSheets) {
-
-    for (const rule of styleSheet.cssRules) {
-      if (rule instanceof window.CSSStyleRule) {
-        const { selectorText, styleMap } = rule;
-
-        const styleMapResults = checkStyleMap(styleMap, selectorText);
-
-        for (const result of styleMapResults) {
-          yield {
-            ...result,
-            styleSheet,
-            selector: selectorText
-          };
-        }
-      }
-    }
+    checkStyleSheet(style);
   }
 }
 
