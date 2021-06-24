@@ -50,8 +50,11 @@
    * @return an iterator of names of undefined CSS custom properties
    */
   function* checkStyleMap(styleMap, elOrSelector) {
-    for (const [value] of styleMap.values()) {
-      yield* checkCssValue(value, elOrSelector);
+    // each entry in the map contains a list, hence the double loop
+    for (const values of styleMap.values()) {
+      for (const value of values) {
+        yield* checkCssValue(value, elOrSelector);
+      }
     }
   }
 
@@ -90,33 +93,25 @@
     for (const el of document.querySelectorAll('[style]')) {
       const { attributeStyleMap } = el;
 
-      const styleMapResults = checkStyleMap(attributeStyleMap, el);
-
-      for (const result of styleMapResults) {
-        yield {
-          ...result,
-          styleSheet: '(inline)',
-          selector: generateSelector(el)
-        };
-      }
+      yield* checkStyleMap(attributeStyleMap, el);
     }
   }
 
   function* checkAllStyles() {
-    yield* checkStyleSheets();
-    yield* checkInlineStyles();
-  }
+    const styleSheetResults = checkStyleSheets(),
+        inlineResults = checkInlineStyles();
 
-  const results = Array.from(checkAllStyles());
-
-  chrome.runtime.sendMessage({ type: 'checker-results', results });
-  chrome.runtime.onMessage.addListener(message => {
-    console.log('received message in checker', message);
-    if (message.type === 'highlight-element') {
-      const { element } = results[message.elementIndex];
-
-      // inspect is a global that is available when the dev tools are open, I think
-      inspect(element);
+    for (const result of styleSheetResults) {
+      yield { ...result, inline: false };
     }
-  });
+
+    for (const result of inlineResults) {
+      yield {
+        ...result,
+        inline: true,
+        styleSheet: null,
+        selector: null
+      };
+    }
+  }
 })();
