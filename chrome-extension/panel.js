@@ -14,15 +14,7 @@ document.getElementById('check-btn').addEventListener('click', function() {
 
 function mkSelectorClickEventListener(counter) {
   return () => {
-    console.log('link click', counter);
-    chrome.devtools.inspectedWindow.eval(`inspect(results[${counter}].element)`, { useContentScriptContext: true }, function() {
-      console.log('eval result', arguments);
-    });
-    //port.postMessage({
-      //type: 'highlight-element',
-      //elementIndex: counter,
-      //tabId: chrome.devtools.inspectedWindow.tabId
-    //});
+    chrome.devtools.inspectedWindow.eval(`inspect(results[${counter}].element)`, { useContentScriptContext: true });
   };
 }
 

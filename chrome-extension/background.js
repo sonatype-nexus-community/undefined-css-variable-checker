@@ -9,10 +9,6 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
           files: ['dist/content.js']
         });
         break;
-      case 'highlight-element':
-        console.log('received highlight-element message', message);
-        //chrome.tabs.sendMessage(message.tabId, message);
-        break;
     }
   }
 
