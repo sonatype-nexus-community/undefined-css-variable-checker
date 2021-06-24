@@ -38,10 +38,8 @@ for that element. The objects which it returns contain the following fields:
   <dd>The name of the undefined CSS custom property (aka variable) that was found</dd>
   <dt>element</dt>
   <dd>the DOM element on which the custom property was used where it was found to be undefined</dd>
-  <dt>styleSheetHref</dt>
-  <dd>The URL of the stylesheet, if it is external to the HTML document</dd>
-  <dt>styleSheetTitle</dt>
-  <dd>The title of the stylesheet if there is one</dd>
+  <dt>styleSheet</dt>
+  <dd>The styleSheet object for the stylesheet where the undefined property was found</dd>
   <dt>selector</dt>
   <dd>The selector on the CSS block where the custom property was found</dd>
 </dl>
@@ -56,12 +54,10 @@ An aggregate of the other two functions. The objects which it returns contain th
   <dd>the DOM element on which the custom property was used where it was found to be undefined</dd>
   <dt>inline</dt>
   <dd>boolean value for whether this object pertains to an inline `style` attribute or a stylesheet</dd>
-  <dt>styleSheetHref</dt>
-  <dd>The URL of the stylesheet, if it is external to the HTML document</dd>
-  <dt>styleSheetTitle</dt>
-  <dd>The title of the stylesheet if there is one</dd>
+  <dt>styleSheet</dt>
+  <dd>The styleSheet object for the stylesheet where the undefined property was found. Null for inline styles</dd>
   <dt>selector</dt>
-  <dd>The selector on the CSS block where the custom property was found</dd>
+  <dd>The selector on the CSS block where the custom property was found. Null for inline styles</dd>
 </dl>
 
 ## Current limitations

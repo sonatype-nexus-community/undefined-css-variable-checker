@@ -84,7 +84,6 @@
    */
   function* checkStyleSheets() {
     for (const styleSheet of document.styleSheets) {
-      const styleSheetLabel = styleSheet.title ? `${styleSheet.title}: ${styleSheet.href}` : styleSheet.href;
 
       for (const rule of styleSheet.cssRules) {
         if (rule instanceof window.CSSStyleRule) {
@@ -95,7 +94,7 @@
           for (const result of styleMapResults) {
             yield {
               ...result,
-              styleSheet: styleSheetLabel,
+              styleSheet,
               selector: selectorText
             };
           }
