@@ -24,7 +24,7 @@ function separateErrorResults(results) {
       errorResults = [];
 
   for (const result of results) {
-    (result.error ? errorResults : results).push(result);
+    (result.error ? errorResults : normalResults).push(result);
   }
 
   return [normalResults, errorResults];
