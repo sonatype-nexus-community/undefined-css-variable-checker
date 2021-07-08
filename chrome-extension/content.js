@@ -49,7 +49,6 @@ function* getResults() {
     if (result.exception) {
       yield {
         error: true,
-        message: result.message,
         styleSheet: getStyleSheetLabel(result.styleSheet)
       }
     }

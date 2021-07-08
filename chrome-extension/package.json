@@ -12,8 +12,8 @@
     "webpack-watch": "webpack --watch",
     "copy": "cpx \"{devtools.*,panel.*,manifest.json}\" dist",
     "copy-watch": "cpx -w \"{devtools.*,panel.*,manifest.json}\" dist",
-    "copy-stylesheet": "cpx \"node_modules/@sonatype/react-shared-components/{react-shared-components.css,assets/fonts/*}\" dist",
-    "copy-stylesheet-watch": "cpx -w \"node_modules/@sonatype/react-shared-components/{react-shared-components.css,assets/fonts/*}\" dist",
+    "copy-stylesheet": "cpx \"{panel.css,node_modules/@sonatype/react-shared-components/{react-shared-components.css,assets/fonts/*}}\" dist",
+    "copy-stylesheet-watch": "cpx -w \"{panel.css,node_modules/@sonatype/react-shared-components/{react-shared-components.css,assets/fonts/*}}\" dist",
     "copy-icons": "cpx \"icons/*\" dist/assets",
     "copy-icons-watch": "cpx -w \"icons/*\" dist/assets"
   },

@@ -89,16 +89,17 @@ function renderErrors(results) {
   }
   else {
     const alertEl = document.createElement('div'),
-        divEl = document.createElement('div'),
         paragraph = document.createElement('p'),
         list = document.createElement('ol');
 
+    alertEl.id = 'error-alert';
     alertEl.classList.add('nx-alert', 'nx-alert--error');
     paragraph.classList.add('nx-p');
 
-    paragraph.textContent = `Errors were encountered while accessing the following stylesheets. This most commonly
+    paragraph.textContent = `The following stylesheets could not be inspected. This most commonly
       indicates that the stylesheets are cross-domain resources which were not served up with the necessary CORS
-      headers for access from this domain.`;
+      headers for access from this domain. Any undefined CSS variables in these stylesheets will not be reported
+      above.`;
 
     for (const result of results) {
       const listItem = document.createElement('li');
@@ -106,10 +107,8 @@ function renderErrors(results) {
       list.append(listItem);
     }
 
-    divEl.append(paragraph);
-    divEl.append(list);
-
-    alertEl.append(divEl);
+    alertEl.append(paragraph);
+    alertEl.append(list);
 
     errorContainer.replaceChildren(alertEl);
   }

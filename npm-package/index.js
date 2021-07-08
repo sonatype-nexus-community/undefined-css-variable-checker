@@ -120,12 +120,7 @@ function* checkStyleSheet(styleSheet) {
     rules = styleSheet.cssRules;
   }
   catch (exception) {
-    yield {
-      message: 'Cannot access rules of styleSheet. This usually means the stylesheet is cross-domain and did not ' +
-        'provide appropriate CORS headers to allow access',
-      exception,
-      styleSheet
-    };
+    yield { exception, styleSheet };
 
     return;
   }

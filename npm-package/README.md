@@ -51,8 +51,6 @@ Additionally, the iterator may return objects like the following in order to rep
   <dd>The Exception object that was caught</dd>
   <dt>styleSheet</dt>
   <dd>The stylesheet being processed when the exception occurred</dd>
-  <dt>message</dt>
-  <dd>An additional explanatory message</dd>
 </dl>
 
 #### checkAllStyles
@@ -78,8 +76,6 @@ Additionally, the iterator may return objects like the following in order to rep
   <dd>The Exception object that was caught</dd>
   <dt>styleSheet</dt>
   <dd>The stylesheet being processed when the exception occurred</dd>
-  <dt>message</dt>
-  <dd>An additional explanatory message</dd>
 </dl>
 
 ## Browser Support
