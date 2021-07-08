@@ -19,6 +19,17 @@ function mkSelectorClickEventListener(counter) {
   };
 }
 
+function separateErrorResults(results) {
+  const normalResults = [],
+      errorResults = [];
+
+  for (const result of results) {
+    (result.error ? errorResults : results).push(result);
+  }
+
+  return [normalResults, errorResults];
+}
+
 function renderResults(results) {
   const tableContent = document.createDocumentFragment();
 
@@ -70,9 +81,45 @@ function renderResults(results) {
   document.getElementById('results-body').replaceChildren(tableContent);
 }
 
+function renderErrors(results) {
+  const errorContainer = document.getElementById('error-container');
+
+  if (!results.length) {
+    errorContainer.replaceChildren();
+  }
+  else {
+    const alertEl = document.createElement('div'),
+        divEl = document.createElement('div'),
+        paragraph = document.createElement('p'),
+        list = document.createElement('ol');
+
+    alertEl.classList.add('nx-alert', 'nx-alert--error');
+    paragraph.classList.add('nx-p');
+
+    paragraph.textContent = `Errors were encountered while accessing the following stylesheets. This most commonly
+      indicates that the stylesheets are cross-domain resources which were not served up with the necessary CORS
+      headers for access from this domain.`;
+
+    for (const result of results) {
+      const listItem = document.createElement('li');
+      listItem.textContent = result.styleSheet;
+      list.append(listItem);
+    }
+
+    divEl.append(paragraph);
+    divEl.append(list);
+
+    alertEl.append(divEl);
+
+    errorContainer.replaceChildren(alertEl);
+  }
+}
+
 chrome.runtime.onMessage.addListener(message => {
   if (message.type === 'checker-results') {
-    renderResults(message.results);
+    const [results, errorResults] = separateErrorResults(message.results);
+    renderResults(results);
+    renderErrors(errorResults);
   }
 });
 

@@ -115,7 +115,22 @@ function* checkRule(rule) {
 }
 
 function* checkStyleSheet(styleSheet) {
-  for (const rule of styleSheet.cssRules) {
+  let rules;
+  try {
+    rules = styleSheet.cssRules;
+  }
+  catch (exception) {
+    yield {
+      message: 'Cannot access rules of styleSheet. This usually means the stylesheet is cross-domain and did not ' +
+        'provide appropriate CORS headers to allow access',
+      exception,
+      styleSheet
+    };
+
+    return;
+  }
+
+  for (const rule of rules) {
     yield* checkRule(rule);
   }
 }

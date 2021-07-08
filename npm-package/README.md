@@ -44,6 +44,17 @@ for that element. The objects which it returns contain the following fields:
   <dd>The selector on the CSS block where the variable was found</dd>
 </dl>
 
+Additionally, the iterator may return objects like the following in order to report errors:
+
+<dl>
+  <dt>exception</dt>
+  <dd>The Exception object that was caught</dd>
+  <dt>styleSheet</dt>
+  <dd>The stylesheet being processed when the exception occurred</dd>
+  <dt>message</dt>
+  <dd>An additional explanatory message</dd>
+</dl>
+
 #### checkAllStyles
 An aggregate of the other two functions. The objects which it returns contain the following fields:
 
@@ -58,6 +69,17 @@ An aggregate of the other two functions. The objects which it returns contain th
   <dd>The styleSheet object for the stylesheet where the undefined variable was found. Null for inline styles</dd>
   <dt>selector</dt>
   <dd>The selector on the CSS block where the variable was found. Null for inline styles</dd>
+</dl>
+
+Additionally, the iterator may return objects like the following in order to report errors:
+
+<dl>
+  <dt>exception</dt>
+  <dd>The Exception object that was caught</dd>
+  <dt>styleSheet</dt>
+  <dd>The stylesheet being processed when the exception occurred</dd>
+  <dt>message</dt>
+  <dd>An additional explanatory message</dd>
 </dl>
 
 ## Browser Support

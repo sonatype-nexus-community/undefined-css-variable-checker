@@ -46,11 +46,20 @@ const getStyleSheetLabel = styleSheet => styleSheet.title ?
 function* getResults() {
   const rawResults = checkAllStyles();
   for (const result of rawResults) {
-    yield {
-      ...result,
-      selector: result.selector || generateSelector(result.element),
-      styleSheet: result.inline ? '(inline)' : getStyleSheetLabel(result.styleSheet)
-    };
+    if (result.exception) {
+      yield {
+        error: true,
+        message: result.message,
+        styleSheet: getStyleSheetLabel(result.styleSheet)
+      }
+    }
+    else {
+      yield {
+        ...result,
+        selector: result.selector || generateSelector(result.element),
+        styleSheet: result.inline ? '(inline)' : getStyleSheetLabel(result.styleSheet)
+      };
+    }
   }
 }
 
