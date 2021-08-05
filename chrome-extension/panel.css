@@ -1,3 +1,7 @@
 #error-alert {
   display: block;
 }
+
+.nx-page {
+  min-width: unset;
+}
