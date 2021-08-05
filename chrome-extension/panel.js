@@ -126,7 +126,7 @@ document.getElementById('check-btn').addEventListener('click', function() {
   const tabId = chrome.devtools.inspectedWindow.tabId;
 
   chrome.scripting.executeScript({
-    target: { tabId, allFrames: true },
+    target: { tabId },
     files: ['./content.js']
   });
 });
