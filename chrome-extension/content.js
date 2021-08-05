@@ -15,9 +15,6 @@
  */
 import { checkAllStyles } from '@sonatype/undefined-css-variable-checker';
 
-// TODO at the moment this is a dumping ground for things in the main checker file which are specific
-// to the chrome extension and not the utility lib. Will be refactored to use the utility lib later
-
 // given an element in the document, create a selector consisting of the tag, id, and classes of that element
 // and all ancestors
 function generateSelector(el) {
